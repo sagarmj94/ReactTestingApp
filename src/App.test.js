@@ -22,38 +22,37 @@
 //   expect(checkInput).toHaveAttribute("value","sagar jadhav");
 // });
 
+import React from "react";
+import { render,screen } from "@testing-library/react";
+import App from "./App";
 
-
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
-
-test('renders a title', () => {
+test("renders a title", () => {
   const { getByText } = render(<App />);
-  const titleElement = getByText('First React Test Case');
+  const titleElement = getByText("First React Test Case");
   expect(titleElement).toBeInTheDocument();
 });
 
-test('renders your name', () => {
+test("renders your name", () => {
   const { getByText } = render(<App />);
-  const nameElement = getByText('Sagar Jadhav');
+  const nameElement = getByText("Sagar Jadhav");
   expect(nameElement).toBeInTheDocument();
 });
 
-test('renders an image with a title', () => {
+test("renders an image with a title", () => {
   const { getByTitle } = render(<App />);
-  const imageElement = getByTitle('ai genrated image');
+  const imageElement = getByTitle("ai genrated image");
   expect(imageElement).toBeInTheDocument();
 });
 
-test('renders an input with specific attributes', () => {
-  const { getByPlaceholderText, getByDisplayValue } = render(<App />);
-  const inputElement = getByPlaceholderText('Enter User Name');
-  const userIdInput = getByDisplayValue('sagar jadhav');
+test("renders the input element with specific attributes", () => {
+  render(<App />); 
 
+  const inputElement = screen.getByPlaceholderText("Enter User Name");
   expect(inputElement).toBeInTheDocument();
-  expect(inputElement).toHaveAttribute('name', 'username');
-  expect(inputElement).toHaveAttribute('id', 'userId');
-  expect(inputElement).toHaveAttribute('readOnly');
-  expect(userIdInput).toBeInTheDocument();
+  expect(inputElement).toHaveAttribute("type", "text"); 
+  expect(inputElement).toHaveAttribute("placeholder", "Enter User Name"); 
+  expect(inputElement).toHaveAttribute("name", "username"); 
+  expect(inputElement).toHaveAttribute("id", "userId"); 
+  expect(inputElement).toHaveAttribute("readonly"); 
+  expect(inputElement).toHaveValue("sagar jadhav");
 });
